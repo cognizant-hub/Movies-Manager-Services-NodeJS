@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const mongoose = require('mongoose');
 const api = require('./routes/api');
 
 var app = express();
@@ -17,11 +16,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-mongoose.connect("mongodb://localhost:27017/moviesDB", {useNewUrlParser: true});
-mongoose.connection.on('error', function(err){
-  console.log('Error connecting to the mongo db server: ' + err);
-});
 
 app.use('/api', api);
 
